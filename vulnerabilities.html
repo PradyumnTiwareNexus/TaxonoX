@@ -11,395 +11,184 @@
 <body>
 <div class="grid-decoration"></div>
 <div class="particles"></div>
-<div class="orb orb-1"></div>
-<div class="orb orb-2"></div>
+<div class="orb orb-1"></div><div class="orb orb-2"></div>
 <div class="top-gradient-line"></div>
-<div id="toast-container" class="toast-container"></div>
 
 <div class="app-shell">
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-  <div class="sidebar-toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">›</div>
-  <a href="dashboard.html" class="sidebar-logo">
-    <div class="sidebar-logo-icon">⚡</div>
-    <div class="sidebar-logo-text">
-      <span class="sidebar-logo-name">TaxonoX</span>
-      <span class="sidebar-logo-sub">Offensive Security OS</span>
-    </div>
-  </a>
-  <nav class="sidebar-nav">
-    <div class="sidebar-section">
-      <span class="sidebar-section-label">Main</span>
-      <a href="dashboard.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-        <span class="nav-item-text">Dashboard</span>
-      </a>
-      <a href="vulnerabilities.html" class="nav-item active">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <span class="nav-item-text">Vulnerabilities</span>
-      </a>
-      <a href="taxonomy.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        <span class="nav-item-text">Taxonomy</span>
-      </a>
-    </div>
-    <div class="sidebar-section">
-      <span class="sidebar-section-label">Knowledge</span>
-      <a href="writeups.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-        <span class="nav-item-text">Writeups</span>
-      </a>
-      <a href="payloads.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
-        <span class="nav-item-text">Payloads</span>
-      </a>
-      <a href="notes.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        <span class="nav-item-text">Recon Notes</span>
-      </a>
-    </div>
-    <div class="sidebar-section">
-      <span class="sidebar-section-label">Workspace</span>
-      <a href="settings.html" class="nav-item">
-        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        <span class="nav-item-text">Settings</span>
-      </a>
-    </div>
-  </nav>
-  <div class="sidebar-footer">
-    <div class="sidebar-user">
-      <div class="user-avatar user-avatar-display">H</div>
-      <div class="user-info">
-        <div class="user-name user-name-display">HunterX</div>
-        <div class="user-role user-role-display">Bug Hunter</div>
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">⟨</button>
+    <a href="dashboard.html" class="sidebar-logo">
+      <div class="sidebar-logo-icon">⚡</div>
+      <div class="sidebar-logo-text"><span class="sidebar-logo-name">TaxonoX</span><span class="sidebar-logo-sub">Knowledge OS</span></div>
+    </a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Main</span>
+        <a href="dashboard.html" class="nav-item"><span class="nav-item-icon">🎯</span><span class="nav-item-text">Dashboard</span></a>
+        <a href="vulnerabilities.html" class="nav-item active"><span class="nav-item-icon">🐛</span><span class="nav-item-text">Vulnerabilities</span><span class="nav-badge" id="vuln-badge">0</span></a>
+        <a href="taxonomy.html" class="nav-item"><span class="nav-item-icon">🗂</span><span class="nav-item-text">Taxonomy</span></a>
+        <a href="writeups.html" class="nav-item"><span class="nav-item-icon">📝</span><span class="nav-item-text">Writeups</span></a>
+        <a href="payloads.html" class="nav-item"><span class="nav-item-icon">💊</span><span class="nav-item-text">Payloads</span></a>
+        <a href="notes.html" class="nav-item"><span class="nav-item-icon">📋</span><span class="nav-item-text">Notes</span></a>
+        <a href="tools.html" class="nav-item"><span class="nav-item-icon">🔧</span><span class="nav-item-text">Tools</span></a>
       </div>
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Settings</span>
+        <a href="settings.html" class="nav-item"><span class="nav-item-icon">⚙</span><span class="nav-item-text">Settings</span></a>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user">
+        <div class="user-avatar user-avatar-display">H</div>
+        <div class="user-info"><div class="user-name user-name-display">Hunter</div><div class="user-role user-role-display">Bug Hunter</div></div>
+      </div>
+      <button class="logout-btn"><span>🚪</span><span>Sign Out</span></button>
     </div>
-  </div>
-</aside>
+  </aside>
 
-<!-- MAIN -->
-<main class="main-content">
-  <header class="top-navbar">
-    <button class="navbar-toggle" id="mobile-menu-btn">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-    <div class="search-bar" style="position:relative">
-      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" class="search-input" id="global-search" placeholder="Search…" autocomplete="off" />
-      <span class="search-shortcut">⌘K</span>
-      <div class="search-results" id="search-results" style="display:none"></div>
-    </div>
-    <div class="navbar-right">
-      <button class="add-vuln-btn" id="add-vuln-btn" data-modal-open="add-vuln-modal">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-        <span>Add Vulnerability</span>
-      </button>
-      <div class="navbar-user">
-        <div class="user-avatar" style="width:28px;height:28px;font-size:11px">H</div>
-        <span style="font-size:12px;font-weight:600" class="user-name-display">HunterX</span>
+  <main class="main-content">
+    <header class="top-navbar">
+      <button class="navbar-toggle" id="mobile-menu-btn">☰</button>
+      <div class="search-bar">
+        <span class="search-icon">🔍</span>
+        <input class="search-input" id="global-search" placeholder="Search vulnerabilities… (Ctrl+K)" />
+        <div class="search-results" id="search-results" style="display:none"></div>
       </div>
-    </div>
-  </header>
+      <div class="navbar-right">
+        <span id="auth-mode-badge" class="auth-mode-badge auth-mode-guest">💾 Guest Mode</span>
+        <button class="add-vuln-btn" id="add-vuln-btn" data-modal-open="add-vuln-modal">+ <span>Add Vulnerability</span></button>
+      </div>
+    </header>
 
-  <div class="page-content page-enter">
-    <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-      <div>
-        <div style="font-size:11px;color:var(--color-purple-light);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Security</div>
-        <h1 class="page-title">Vulnerabilities</h1>
-        <p class="page-subtitle" id="filter-stats">All vulnerabilities in your knowledge base</p>
+    <div class="page-content page-enter">
+      <div class="page-header" style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <div class="page-title">🐛 Vulnerabilities</div>
+          <div class="page-subtitle">Your full vulnerability database — filter, sort, and manage</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary btn-sm" onclick="clearFilters()">✕ Clear Filters</button>
+          <button class="btn btn-secondary btn-sm" onclick="TaxonoX.exportData()">📤 Export</button>
+        </div>
       </div>
-      <div style="display:flex;gap:8px">
-        <button class="btn btn-secondary btn-sm" onclick="TaxonoX.exportData()">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-          Export
-        </button>
-        <button class="btn btn-primary btn-sm" data-modal-open="add-vuln-modal">+ Add Vulnerability</button>
-      </div>
-    </div>
 
-    <!-- FILTER BAR -->
-    <div class="card" style="margin-bottom:16px">
-      <div class="filter-bar">
-        <div class="filter-wrap" style="position:relative;flex:1;max-width:300px">
-          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text-muted)"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" class="filter-input" id="vuln-search" placeholder="Search vulnerabilities…" style="padding-left:30px" />
+      <div class="card" style="overflow:visible">
+        <!-- Filter bar -->
+        <div class="filter-bar">
+          <div class="filter-wrap" style="position:relative;flex:1;min-width:180px;max-width:300px">
+            <span class="search-icon" style="position:absolute;left:9px;top:50%;transform:translateY(-50%);color:var(--text-muted);font-size:13px">🔍</span>
+            <input class="filter-input" id="vuln-search" placeholder="Search name, ID, tag…" style="padding-left:30px" />
+          </div>
+          <select class="filter-select" id="filter-severity">
+            <option value="">All Severities</option>
+            <option>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Info</option>
+          </select>
+          <select class="filter-select" id="filter-status">
+            <option value="">All Statuses</option>
+            <option>New</option><option>In Progress</option><option>Confirmed</option><option>Reported</option><option>Duplicate</option><option>N/A</option>
+          </select>
+          <select class="filter-select" id="filter-owasp">
+            <option value="">All OWASP</option>
+            <option>A01:2021</option><option>A02:2021</option><option>A03:2021</option><option>A04:2021</option><option>A05:2021</option>
+            <option>A06:2021</option><option>A07:2021</option><option>A08:2021</option><option>A09:2021</option><option>A10:2021</option>
+          </select>
+          <span class="text-xs text-muted" id="filter-stats"></span>
         </div>
 
-        <select class="filter-select" id="filter-severity">
-          <option value="">All Severity</option>
-          <option>Critical</option>
-          <option>High</option>
-          <option>Medium</option>
-          <option>Low</option>
-          <option>Info</option>
-        </select>
+        <!-- Table -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th data-sort="id">ID</th>
+                <th data-sort="name">Name</th>
+                <th data-sort="severity">Severity</th>
+                <th data-sort="owasp">OWASP</th>
+                <th data-sort="cwe">CWE</th>
+                <th data-sort="status">Status</th>
+                <th data-sort="date">Date</th>
+                <th>Tags</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="vuln-tbody"></tbody>
+          </table>
+        </div>
 
-        <select class="filter-select" id="filter-status">
-          <option value="">All Status</option>
-          <option>New</option>
-          <option>In Progress</option>
-          <option>Confirmed</option>
-          <option>Reported</option>
-          <option>Duplicate</option>
-          <option>N/A</option>
-        </select>
-
-        <select class="filter-select" id="filter-owasp">
-          <option value="">All OWASP</option>
-          <option>A01:2021</option><option>A02:2021</option><option>A03:2021</option>
-          <option>A04:2021</option><option>A05:2021</option><option>A06:2021</option>
-          <option>A07:2021</option><option>A08:2021</option><option>A09:2021</option>
-          <option>A10:2021</option>
-        </select>
-
-        <button class="btn btn-ghost btn-sm" onclick="clearFilters()">Clear Filters</button>
+        <!-- Pagination -->
+        <div class="pagination" id="pagination"></div>
       </div>
 
-      <!-- TABLE -->
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th data-sort="id" style="width:90px">ID</th>
-              <th data-sort="name">Vulnerability</th>
-              <th data-sort="severity" style="width:110px">Rating</th>
-              <th data-sort="owasp" style="width:100px">OWASP</th>
-              <th data-sort="cwe" style="width:90px">CWE ID</th>
-              <th data-sort="status" style="width:120px">Status</th>
-              <th data-sort="date" style="width:110px">Added On</th>
-              <th style="width:130px">Tags</th>
-              <th style="width:90px">Actions</th>
-            </tr>
-          </thead>
-          <tbody id="vuln-tbody">
-            <tr><td colspan="9" class="text-center text-muted" style="padding:32px">Loading…</td></tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- PAGINATION -->
-      <div class="pagination" id="pagination"></div>
+      <footer class="site-footer">
+        <div>TaxonoX — Offensive Security Knowledge OS</div>
+        <div class="footer-links">
+          <a href="https://github.com/PradyumnTiwareNexus" target="_blank" class="footer-link">⚡ GitHub</a>
+          <a href="https://pradyumntiwarenexus.medium.com/" target="_blank" class="footer-link">✍ Medium</a>
+          <a href="https://www.linkedin.com/in/pradyumn-tiwarinexus-b270561b1/" target="_blank" class="footer-link">🔗 LinkedIn</a>
+          <a href="https://x.com/pradyumnTiwari0" target="_blank" class="footer-link">𝕏 Twitter</a>
+        </div>
+      </footer>
     </div>
-
-    <footer style="text-align:center;padding:16px 0 8px;color:var(--text-muted);font-size:11px">
-      Built by <span style="color:var(--color-purple-light);font-weight:600">PradyumnTiwareNexus</span> © 2026 · TaxonoX
-    </footer>
-  </div>
-</main>
+  </main>
 </div>
 
-<!-- ADD VULN MODAL -->
+<!-- Add Vuln Modal -->
 <div class="modal-backdrop" id="add-vuln-modal" style="display:none">
   <div class="modal-box">
-    <div class="modal-header">
-      <div class="modal-title">Add New Vulnerability</div>
-      <button class="modal-close" data-modal-close="add-vuln-modal">✕</button>
+    <div class="modal-header"><span class="modal-title">➕ Add Vulnerability</span><button class="modal-close" data-modal-close="add-vuln-modal">✕</button></div>
+    <div class="modal-body">
+      <form id="add-vuln-form">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group" style="grid-column:span 2"><label class="form-label required">Name</label><input name="name" class="form-control" placeholder="e.g. SQL Injection in Login" required /></div>
+          <div class="form-group"><label class="form-label">Severity</label><select name="severity" class="form-control"><option>Critical</option><option selected>High</option><option>Medium</option><option>Low</option><option>Info</option></select></div>
+          <div class="form-group"><label class="form-label">Status</label><select name="status" class="form-control"><option>New</option><option>In Progress</option><option>Confirmed</option><option>Reported</option><option>Duplicate</option><option>N/A</option></select></div>
+          <div class="form-group"><label class="form-label">OWASP</label><select name="owasp" class="form-control"><option value="">— Select —</option><option>A01:2021</option><option>A02:2021</option><option>A03:2021</option><option>A04:2021</option><option>A05:2021</option><option>A06:2021</option><option>A07:2021</option><option>A08:2021</option><option>A09:2021</option><option>A10:2021</option></select></div>
+          <div class="form-group"><label class="form-label">CWE</label><input name="cwe" class="form-control" placeholder="CWE-89" /></div>
+          <div class="form-group"><label class="form-label">Target</label><input name="target" class="form-control" placeholder="api.target.com" /></div>
+          <div class="form-group"><label class="form-label">Platform</label><input name="platform" class="form-control" placeholder="HackerOne" /></div>
+          <div class="form-group"><label class="form-label">Discovery Date</label><input name="discoveredOn" type="date" class="form-control" /></div>
+          <div class="form-group"><label class="form-label">Tags (comma-separated)</label><input name="tags" class="form-control" placeholder="SQLi, Auth, P1" /></div>
+          <div class="form-group" style="grid-column:span 2"><label class="form-label">Short Description</label><textarea name="shortDesc" class="form-control" rows="2" placeholder="One-line summary"></textarea></div>
+          <div class="form-group" style="grid-column:span 2"><label class="form-label">How to Find / Reproduce</label><textarea name="howToFind" class="form-control" rows="3" placeholder="Steps to reproduce..."></textarea></div>
+          <div class="form-group" style="grid-column:span 2"><label class="form-label">Exploit / PoC</label><textarea name="exploit" class="form-control" rows="2" placeholder="Payload..."></textarea></div>
+          <div class="form-group" style="grid-column:span 2"><label class="form-label">Remediation</label><textarea name="remediation" class="form-control" rows="2" placeholder="How to fix..."></textarea></div>
+        </div>
+      </form>
     </div>
-    <form id="add-vuln-form">
-      <div class="tab-container">
-        <div class="tabs modal-tabs" style="padding:0 24px;border-bottom:1px solid var(--border-subtle);margin-bottom:0">
-          <button type="button" class="tab-btn active" data-tab="basic">Basic Info</button>
-          <button type="button" class="tab-btn" data-tab="details">Details</button>
-          <button type="button" class="tab-btn" data-tab="exploit">Exploitation</button>
-          <button type="button" class="tab-btn" data-tab="impact">Impact</button>
-          <button type="button" class="tab-btn" data-tab="bugreport">Bug Report</button>
-        </div>
-        <div class="modal-body">
-          <div class="tab-panel active" data-tab-panel="basic">
-            <div class="grid grid-cols-2 gap-3">
-              <div class="form-group" style="grid-column:span 2">
-                <label class="form-label required">Vulnerability Name</label>
-                <input type="text" name="name" class="form-control" placeholder="e.g. SQL Injection in Login" required />
-              </div>
-              <div class="form-group">
-                <label class="form-label required">Severity</label>
-                <select name="severity" class="form-control" required>
-                  <option value="">Select Severity</option>
-                  <option>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Info</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label required">Status</label>
-                <select name="status" class="form-control" required>
-                  <option value="">Select Status</option>
-                  <option>New</option><option>In Progress</option><option>Confirmed</option><option>Reported</option><option>Duplicate</option><option>N/A</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">OWASP Category</label>
-                <select name="owasp" class="form-control">
-                  <option value="">Select Category</option>
-                  <option>A01:2021</option><option>A02:2021</option><option>A03:2021</option><option>A04:2021</option><option>A05:2021</option><option>A06:2021</option><option>A07:2021</option><option>A08:2021</option><option>A09:2021</option><option>A10:2021</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label class="form-label">CWE ID</label>
-                <input type="text" name="cwe" class="form-control" placeholder="e.g. CWE-89" />
-              </div>
-              <div class="form-group" style="grid-column:span 2">
-                <label class="form-label">Short Description</label>
-                <textarea name="shortDesc" class="form-control" style="min-height:64px" placeholder="Brief description…"></textarea>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Tags</label>
-                <input type="text" name="tags" class="form-control" placeholder="SQLi, Auth, P1 (comma separated)" />
-              </div>
-              <div class="form-group">
-                <label class="form-label">Discovered On</label>
-                <input type="date" name="discoveredOn" class="form-control" />
-              </div>
-            </div>
-          </div>
-          <div class="tab-panel" data-tab-panel="details">
-            <div class="form-group">
-              <label class="form-label">Detailed Description</label>
-              <textarea name="description" class="form-control" style="min-height:100px" placeholder="Full technical description…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">How To Find</label>
-              <textarea name="howToFind" class="form-control" style="min-height:80px" placeholder="Discovery methodology…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Remediation</label>
-              <textarea name="remediation" class="form-control" style="min-height:80px" placeholder="How to fix…"></textarea>
-            </div>
-          </div>
-          <div class="tab-panel" data-tab-panel="exploit">
-            <div class="form-group">
-              <label class="form-label">Exploit Methodology</label>
-              <textarea name="exploit" class="form-control" style="min-height:80px;font-family:var(--font-mono)" placeholder="Exploit code or steps…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Recon Method</label>
-              <textarea name="reconMethod" class="form-control" style="min-height:60px" placeholder="Recon approach…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Example Payloads</label>
-              <textarea name="payloads" class="form-control" style="min-height:60px;font-family:var(--font-mono)" placeholder="Payloads used…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Required Tools</label>
-              <input type="text" name="tools" class="form-control" placeholder="Burp Suite, sqlmap, etc." />
-            </div>
-          </div>
-          <div class="tab-panel" data-tab-panel="impact">
-            <div class="form-group">
-              <label class="form-label">Impact</label>
-              <textarea name="impact" class="form-control" style="min-height:80px" placeholder="Business and technical impact…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">References</label>
-              <textarea name="references" class="form-control" style="min-height:60px" placeholder="CVE, CWE, OWASP links…"></textarea>
-            </div>
-            <div class="form-group">
-              <label class="form-label">Writeup URL</label>
-              <input type="url" name="writeupUrl" class="form-control" placeholder="https://..." />
-            </div>
-          </div>
-          <div class="tab-panel" data-tab-panel="bugreport">
-            <div class="form-group">
-              <label class="form-label">Target URL</label>
-              <input type="text" name="target" class="form-control" placeholder="api.example.com" />
-            </div>
-            <div class="form-group">
-              <label class="form-label">Bug Bounty Platform</label>
-              <select name="platform" class="form-control">
-                <option value="">Select Platform</option>
-                <option>HackerOne</option><option>Bugcrowd</option><option>Intigriti</option><option>Synack</option><option>Private Program</option><option>CTF</option><option>Other</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-modal-close="add-vuln-modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Create Vulnerability</button>
-      </div>
-    </form>
+    <div class="modal-footer"><button class="btn btn-secondary" data-modal-close="add-vuln-modal">Cancel</button><button class="btn btn-primary" type="submit" form="add-vuln-form">Save</button></div>
   </div>
 </div>
 
-<!-- EDIT MODAL -->
+<!-- Edit Modal -->
 <div class="modal-backdrop" id="edit-vuln-modal" style="display:none">
-  <div class="modal-box" style="max-width:540px">
-    <div class="modal-header">
-      <div class="modal-title">Edit Vulnerability</div>
-      <button class="modal-close" data-modal-close="edit-vuln-modal">✕</button>
-    </div>
-    <form id="edit-vuln-form">
-      <div class="modal-body">
-        <input type="hidden" name="id" />
-        <div class="grid grid-cols-2 gap-3">
-          <div class="form-group" style="grid-column:span 2">
-            <label class="form-label required">Name</label>
-            <input type="text" name="name" class="form-control" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label">Severity</label>
-            <select name="severity" class="form-control">
-              <option>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Info</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">Status</label>
-            <select name="status" class="form-control">
-              <option>New</option><option>In Progress</option><option>Confirmed</option><option>Reported</option><option>Duplicate</option><option>N/A</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">OWASP</label>
-            <select name="owasp" class="form-control">
-              <option value="">—</option>
-              <option>A01:2021</option><option>A02:2021</option><option>A03:2021</option><option>A04:2021</option><option>A05:2021</option><option>A06:2021</option><option>A07:2021</option><option>A08:2021</option><option>A09:2021</option><option>A10:2021</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label class="form-label">CWE</label>
-            <input type="text" name="cwe" class="form-control" placeholder="CWE-89" />
-          </div>
-          <div class="form-group" style="grid-column:span 2">
-            <label class="form-label">Tags</label>
-            <input type="text" name="tags" class="form-control" placeholder="SQLi, Auth, P1" />
-          </div>
-          <div class="form-group" style="grid-column:span 2">
-            <label class="form-label">Short Description</label>
-            <textarea name="shortDesc" class="form-control" style="min-height:60px"></textarea>
-          </div>
-          <div class="form-group" style="grid-column:span 2">
-            <label class="form-label">Target</label>
-            <input type="text" name="target" class="form-control" placeholder="api.example.com" />
-          </div>
+  <div class="modal-box">
+    <div class="modal-header"><span class="modal-title">✎ Edit Vulnerability</span><button class="modal-close" data-modal-close="edit-vuln-modal">✕</button></div>
+    <div class="modal-body">
+      <form id="edit-vuln-form">
+        <input name="id" type="hidden" />
+        <div class="grid grid-cols-2 gap-4">
+          <div class="form-group" style="grid-column:span 2"><label class="form-label required">Name</label><input name="name" class="form-control" required /></div>
+          <div class="form-group"><label class="form-label">Severity</label><select name="severity" class="form-control"><option>Critical</option><option>High</option><option>Medium</option><option>Low</option><option>Info</option></select></div>
+          <div class="form-group"><label class="form-label">Status</label><select name="status" class="form-control"><option>New</option><option>In Progress</option><option>Confirmed</option><option>Reported</option><option>Duplicate</option><option>N/A</option></select></div>
+          <div class="form-group"><label class="form-label">OWASP</label><input name="owasp" class="form-control" /></div>
+          <div class="form-group"><label class="form-label">CWE</label><input name="cwe" class="form-control" /></div>
+          <div class="form-group"><label class="form-label">Target</label><input name="target" class="form-control" /></div>
+          <div class="form-group"><label class="form-label">Tags</label><input name="tags" class="form-control" placeholder="tag1, tag2" /></div>
+          <div class="form-group" style="grid-column:span 2"><label class="form-label">Short Description</label><textarea name="shortDesc" class="form-control" rows="2"></textarea></div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-modal-close="edit-vuln-modal">Cancel</button>
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-      </div>
-    </form>
+      </form>
+    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" data-modal-close="edit-vuln-modal">Cancel</button><button class="btn btn-primary" type="submit" form="edit-vuln-form">Update</button></div>
   </div>
 </div>
 
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/auth-guard.js"></script>
 <script src="assets/js/app.js"></script>
 <script src="assets/js/vulnerability.js"></script>
-<script>
-  function clearFilters() {
-    document.getElementById('vuln-search').value = '';
-    document.getElementById('filter-severity').value = '';
-    document.getElementById('filter-status').value = '';
-    document.getElementById('filter-owasp').value = '';
-    if (window.filters) { window.filters = { search:'', severity:'', status:'', owasp:'' }; }
-    renderVulnTable();
-  }
-  document.querySelectorAll('.modal-tabs .tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modal = btn.closest('.tab-container');
-      modal.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      modal.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      const target = modal.querySelector('[data-tab-panel="' + btn.dataset.tab + '"]');
-      if (target) target.classList.add('active');
-    });
-  });
-</script>
 </body>
 </html>

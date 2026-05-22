@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tools — TaxonoX</title>
+  <link rel="stylesheet" href="assets/css/style.css" /><link rel="stylesheet" href="assets/css/glass.css" /><link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+<div class="grid-decoration"></div><div class="particles"></div><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="top-gradient-line"></div>
+
+<div class="app-shell">
+  <aside class="sidebar" id="sidebar">
+    <button class="sidebar-toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">⟨</button>
+    <a href="dashboard.html" class="sidebar-logo"><div class="sidebar-logo-icon">⚡</div><div class="sidebar-logo-text"><span class="sidebar-logo-name">TaxonoX</span><span class="sidebar-logo-sub">Knowledge OS</span></div></a>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section">
+        <span class="sidebar-section-label">Main</span>
+        <a href="dashboard.html" class="nav-item"><span class="nav-item-icon">🎯</span><span class="nav-item-text">Dashboard</span></a>
+        <a href="vulnerabilities.html" class="nav-item"><span class="nav-item-icon">🐛</span><span class="nav-item-text">Vulnerabilities</span><span class="nav-badge" id="vuln-badge">0</span></a>
+        <a href="taxonomy.html" class="nav-item"><span class="nav-item-icon">🗂</span><span class="nav-item-text">Taxonomy</span></a>
+        <a href="writeups.html" class="nav-item"><span class="nav-item-icon">📝</span><span class="nav-item-text">Writeups</span></a>
+        <a href="payloads.html" class="nav-item"><span class="nav-item-icon">💊</span><span class="nav-item-text">Payloads</span></a>
+        <a href="notes.html" class="nav-item"><span class="nav-item-icon">📋</span><span class="nav-item-text">Notes</span></a>
+        <a href="tools.html" class="nav-item active"><span class="nav-item-icon">🔧</span><span class="nav-item-text">Tools</span></a>
+      </div>
+      <div class="sidebar-section"><span class="sidebar-section-label">Settings</span><a href="settings.html" class="nav-item"><span class="nav-item-icon">⚙</span><span class="nav-item-text">Settings</span></a></div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="sidebar-user"><div class="user-avatar user-avatar-display">H</div><div class="user-info"><div class="user-name user-name-display">Hunter</div><div class="user-role user-role-display">Bug Hunter</div></div></div>
+      <button class="logout-btn"><span>🚪</span><span>Sign Out</span></button>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <header class="top-navbar">
+      <button class="navbar-toggle" id="mobile-menu-btn">☰</button>
+      <div class="search-bar"><span class="search-icon">🔍</span><input class="search-input" id="global-search" placeholder="Search…" /><div class="search-results" id="search-results" style="display:none"></div></div>
+      <div class="navbar-right"><span id="auth-mode-badge" class="auth-mode-badge auth-mode-guest">💾 Guest Mode</span><button class="add-vuln-btn" onclick="openToolModal()">+ <span>Add Tool</span></button></div>
+    </header>
+
+    <div class="page-content page-enter">
+      <div class="page-header"><div class="page-title">🔧 Tools</div><div class="page-subtitle">Your offensive security toolkit — commands and references</div></div>
+      <div class="grid grid-cols-3 gap-4 stagger-children" id="tools-grid"></div>
+      <footer class="site-footer">
+        <div>TaxonoX — Offensive Security Knowledge OS</div>
+        <div class="footer-links">
+          <a href="https://github.com/PradyumnTiwareNexus" target="_blank" class="footer-link">⚡ GitHub</a>
+          <a href="https://pradyumntiwarenexus.medium.com/" target="_blank" class="footer-link">✍ Medium</a>
+          <a href="https://www.linkedin.com/in/pradyumn-tiwarinexus-b270561b1/" target="_blank" class="footer-link">🔗 LinkedIn</a>
+          <a href="https://x.com/pradyumnTiwari0" target="_blank" class="footer-link">𝕏 Twitter</a>
+        </div>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="tool-modal" style="display:none">
+  <div class="modal-box" style="max-width:520px">
+    <div class="modal-header"><span class="modal-title">🔧 Add Tool</span><button class="modal-close" data-modal-close="tool-modal">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="tl-edit-id" />
+      <div class="form-group"><label class="form-label required">Tool Name</label><input id="tl-name" class="form-control" placeholder="subfinder" required /></div>
+      <div class="form-group"><label class="form-label">Category</label><select id="tl-category" class="form-control"><option>Recon</option><option>Scanner</option><option>Fuzzer</option><option>Proxy</option><option>Exploit</option><option>Post-Exploit</option><option>Other</option></select></div>
+      <div class="form-group"><label class="form-label">Description</label><textarea id="tl-description" class="form-control" rows="2" placeholder="Brief description…"></textarea></div>
+      <div class="form-group"><label class="form-label">Commands / Usage</label><textarea id="tl-commands" class="form-control font-mono" rows="3" placeholder="subfinder -d target.com -o subs.txt"></textarea></div>
+      <div class="form-group"><label class="form-label">Tags</label><input id="tl-tags" class="form-control" placeholder="Recon, Essential" /></div>
+    </div>
+    <div class="modal-footer"><button class="btn btn-secondary" data-modal-close="tool-modal">Cancel</button><button class="btn btn-primary" onclick="saveTool()">Save Tool</button></div>
+  </div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+<script src="assets/js/storage.js"></script>
+<script src="assets/js/auth-guard.js"></script>
+<script src="assets/js/app.js"></script>
+<script>
+'use strict';
+const catIcon={Recon:'🔭',Scanner:'🔍',Fuzzer:'🎯',Proxy:'🔄',Exploit:'💥','Post-Exploit':'🏴',Other:'🔧'};
+function renderTools(){
+  const tools=TXStorage.get('tools',[]);
+  const grid=document.getElementById('tools-grid');
+  if(!tools.length){grid.innerHTML='<div class="empty-state" style="grid-column:span 3"><div class="empty-state-icon">🔧</div><div class="empty-state-title">No tools yet</div><div class="empty-state-text">Add your go-to security tools and commands.</div></div>';return;}
+  grid.innerHTML=tools.map(t=>`
+    <div class="card hover-lift" style="padding:16px">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div style="display:flex;align-items:center;gap:8px"><span style="font-size:20px">${catIcon[t.category]||'🔧'}</span><div style="font-weight:700;color:var(--text-primary)">${t.name}</div></div>
+        <span class="tag">${t.category}</span>
+      </div>
+      ${t.description?`<div style="font-size:12px;color:var(--text-secondary);margin-bottom:10px">${t.description}</div>`:''}
+      ${t.commands?`<div class="code-block" style="font-size:11px;margin-bottom:10px">${t.commands}</div>`:''}
+      <div style="display:flex;flex-wrap:wrap;gap:2px;margin-bottom:10px">${(t.tags||[]).map(x=>`<span class="tag">${x}</span>`).join('')}</div>
+      <div style="display:flex;gap:6px">
+        ${t.commands?`<button class="btn btn-secondary btn-sm" onclick="copyCmd('${t.id}')">📋 Copy</button>`:''}
+        <button class="btn btn-secondary btn-sm" onclick="editTool('${t.id}')">✎</button>
+        <button class="btn btn-danger btn-sm" onclick="deleteTool('${t.id}')">🗑</button>
+      </div>
+    </div>`).join('');
+}
+function openToolModal(editId){
+  document.getElementById('tl-edit-id').value=editId||'';
+  if(editId){const t=TXStorage.get('tools',[]).find(x=>x.id===editId);if(t){document.getElementById('tl-name').value=t.name;document.getElementById('tl-category').value=t.category;document.getElementById('tl-description').value=t.description||'';document.getElementById('tl-commands').value=t.commands||'';document.getElementById('tl-tags').value=(t.tags||[]).join(', ');}}
+  else{['tl-name','tl-description','tl-commands','tl-tags'].forEach(id=>document.getElementById(id).value='');}
+  TaxonoX.openModal('tool-modal');
+}
+function saveTool(){
+  const name=document.getElementById('tl-name').value.trim();
+  if(!name){TaxonoX.showToast('error','Name required');return;}
+  const editId=document.getElementById('tl-edit-id').value;
+  const tools=TXStorage.get('tools',[]);
+  const data={name,category:document.getElementById('tl-category').value,description:document.getElementById('tl-description').value,commands:document.getElementById('tl-commands').value,tags:document.getElementById('tl-tags').value.split(',').map(t=>t.trim()).filter(Boolean)};
+  if(editId){const idx=tools.findIndex(t=>t.id===editId);if(idx!==-1)tools[idx]={...tools[idx],...data};}
+  else tools.unshift({id:'TOOL-'+Date.now(),...data});
+  TXStorage.set('tools',tools);
+  TaxonoX.closeModal('tool-modal');
+  TaxonoX.showToast('success','Saved','Tool saved');
+  renderTools();
+}
+window.copyCmd=function(id){const t=TXStorage.get('tools',[]).find(x=>x.id===id);if(t&&t.commands)navigator.clipboard.writeText(t.commands).then(()=>TaxonoX.showToast('success','Copied'));};
+window.editTool=id=>openToolModal(id);
+window.deleteTool=function(id){if(!confirm('Delete?'))return;let t=TXStorage.get('tools',[]);t=t.filter(x=>x.id!==id);TXStorage.set('tools',t);TaxonoX.showToast('success','Deleted');renderTools();};
+document.addEventListener('DOMContentLoaded',()=>{TXStorage.subscribe('tools',()=>renderTools());renderTools();});
+</script>
+</body>
+</html>

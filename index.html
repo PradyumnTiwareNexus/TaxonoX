@@ -3,85 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TaxonoX — Offensive Security OS</title>
+  <title>TaxonoX — Login</title>
   <link rel="stylesheet" href="assets/css/style.css" />
   <link rel="stylesheet" href="assets/css/glass.css" />
   <link rel="stylesheet" href="assets/css/animations.css" />
-  <style>
-    .splash {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 32px;
-      position: relative;
-      z-index: 1;
-    }
-    .splash-logo {
-      width: 80px; height: 80px;
-      background: linear-gradient(135deg, var(--color-purple), var(--color-cyan));
-      border-radius: 20px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 38px;
-      margin: 0 auto 20px;
-      box-shadow: 0 0 40px rgba(136,85,255,0.5);
-      animation: splashPulse 2s ease-in-out infinite;
-    }
-    @keyframes splashPulse {
-      0%, 100% { box-shadow: 0 0 40px rgba(136,85,255,0.5); }
-      50% { box-shadow: 0 0 60px rgba(136,85,255,0.8), 0 0 100px rgba(34,211,238,0.3); }
-    }
-    .splash-title {
-      font-size: 52px;
-      font-weight: 900;
-      background: linear-gradient(135deg, #a07aff 0%, #22d3ee 50%, #ff6b35 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 8px;
-    }
-    .splash-sub {
-      font-size: 16px;
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-      letter-spacing: 0.5px;
-    }
-    .splash-loading {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-muted);
-      font-size: 12px;
-    }
-    .splash-dot {
-      width: 6px; height: 6px;
-      background: var(--color-purple-light);
-      border-radius: 50%;
-      animation: dotBounce 1.2s ease-in-out infinite;
-    }
-    .splash-dot:nth-child(2) { animation-delay: 0.2s; background: var(--color-cyan); }
-    .splash-dot:nth-child(3) { animation-delay: 0.4s; background: var(--color-purple-light); }
-    @keyframes dotBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-6px); }
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      max-width: 600px;
-      margin: 24px auto;
-    }
-    .feature-pill {
-      padding: 8px 12px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-full);
-      font-size: 12px;
-      color: var(--text-secondary);
-    }
-  </style>
 </head>
 <body>
 <div class="grid-decoration"></div>
@@ -91,36 +16,222 @@
 <div class="orb orb-3"></div>
 <div class="top-gradient-line"></div>
 
-<div class="splash">
-  <div class="splash-logo">⚡</div>
-  <div class="splash-title">TaxonoX</div>
-  <div class="splash-sub">Offensive Security Knowledge OS · For Bug Bounty Hunters</div>
+<div class="auth-page">
+  <div class="auth-box animate-fade-in-up">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">⚡</div>
+      <div class="auth-logo-title">TaxonoX</div>
+      <div class="auth-logo-sub">Offensive Security Knowledge OS · For Bug Bounty Hunters</div>
+    </div>
 
-  <div class="feature-grid">
-    <div class="feature-pill">🛡️ Vulnerability CRUD</div>
-    <div class="feature-pill">📊 Live Analytics</div>
-    <div class="feature-pill">📝 Writeup Vault</div>
-    <div class="feature-pill">💾 Payload Library</div>
-    <div class="feature-pill">🏷️ OWASP Taxonomy</div>
-    <div class="feature-pill">📒 Recon Notes</div>
-  </div>
+    <div class="auth-card">
+      <!-- Tab switcher -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab" id="tab-register" onclick="switchTab('register')">Register</button>
+      </div>
 
-  <div class="splash-loading">
-    <div class="splash-dot"></div>
-    <div class="splash-dot"></div>
-    <div class="splash-dot"></div>
-    <span style="margin-left:4px">Initializing workspace…</span>
+      <div id="auth-error" class="auth-error"></div>
+      <div id="auth-success" class="auth-success"></div>
+
+      <!-- Login form -->
+      <form id="login-form" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="login-email" class="form-control" placeholder="hunter@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="login-pass" class="form-control" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <button type="submit" class="auth-submit" id="login-btn">
+          <span id="login-btn-text">Login to Workspace</span>
+          <span id="login-spinner" class="spinner" style="display:none"></span>
+        </button>
+      </form>
+
+      <!-- Register form -->
+      <form id="register-form" style="display:none" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label class="form-label">Username / Handle</label>
+          <input type="text" id="reg-username" class="form-control" placeholder="HunterX" required autocomplete="nickname" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" id="reg-email" class="form-control" placeholder="hunter@example.com" required autocomplete="email" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input type="password" id="reg-pass" class="form-control" placeholder="Min 6 characters" required autocomplete="new-password" minlength="6" />
+        </div>
+        <button type="submit" class="auth-submit" id="reg-btn">
+          <span id="reg-btn-text">Create Account</span>
+          <span id="reg-spinner" class="spinner" style="display:none"></span>
+        </button>
+      </form>
+
+      <div class="auth-divider">or</div>
+
+      <button class="guest-btn" onclick="continueAsGuest()">
+        🔍 Continue as Guest
+        <span style="font-size:10px;color:var(--text-muted)">(localStorage only)</span>
+      </button>
+
+      <div style="margin-top:16px;text-align:center;font-size:11px;color:var(--text-muted)">
+        Guest mode stores data locally. Login for cross-device sync via Firestore.
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:20px;font-size:11px;color:var(--text-muted)">
+      Built by <span style="color:var(--color-purple-light);font-weight:600">PradyumnTiwareNexus</span> © 2026
+    </div>
   </div>
 </div>
 
-<script src="assets/js/app.js"></script>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script src="assets/js/firebase-config.js"></script>
+
 <script>
-  // Auto-redirect to dashboard after init
-  document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-      window.location.href = 'dashboard.html';
-    }, 1200);
+'use strict';
+
+/* ---- Particles init ---- */
+(function() {
+  const c = document.querySelector('.particles');
+  if (!c) return;
+  for (let i=0;i<15;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    p.style.cssText=`left:${Math.random()*100}%;animation-duration:${8+Math.random()*12}s;animation-delay:${-Math.random()*10}s;width:${1+Math.random()*2}px;height:${1+Math.random()*2}px;opacity:${0.2+Math.random()*0.4}`;
+    c.appendChild(p);
+  }
+})();
+
+/* ---- Check if already authenticated ---- */
+document.addEventListener('DOMContentLoaded', () => {
+  const mode = localStorage.getItem('txnx_mode');
+  if (mode === 'guest' || mode === 'user') {
+    window.location.replace('dashboard.html');
+    return;
+  }
+  // Also check Firebase auth state
+  window.auth.onAuthStateChanged(user => {
+    if (user) {
+      setUserMode(user);
+      window.location.replace('dashboard.html');
+    }
   });
+});
+
+/* ---- Tab Switch ---- */
+function switchTab(tab) {
+  const loginForm = document.getElementById('login-form');
+  const regForm   = document.getElementById('register-form');
+  document.getElementById('tab-login').classList.toggle('active', tab==='login');
+  document.getElementById('tab-register').classList.toggle('active', tab==='register');
+  loginForm.style.display = tab==='login' ? 'block' : 'none';
+  regForm.style.display   = tab==='register' ? 'block' : 'none';
+  clearMessages();
+}
+
+function showError(msg) {
+  const el = document.getElementById('auth-error');
+  el.textContent = msg; el.classList.add('show');
+  document.getElementById('auth-success').classList.remove('show');
+}
+function showSuccess(msg) {
+  const el = document.getElementById('auth-success');
+  el.textContent = msg; el.classList.add('show');
+  document.getElementById('auth-error').classList.remove('show');
+}
+function clearMessages() {
+  document.getElementById('auth-error').classList.remove('show');
+  document.getElementById('auth-success').classList.remove('show');
+}
+
+function setLoading(formType, loading) {
+  const btn     = document.getElementById(formType+'-btn');
+  const spinner = document.getElementById(formType+'-spinner');
+  const text    = document.getElementById(formType+'-btn-text');
+  btn.disabled  = loading;
+  spinner.style.display = loading ? 'inline-block' : 'none';
+  text.style.opacity    = loading ? '0.6' : '1';
+}
+
+/* ---- Set user session ---- */
+function setUserMode(user, username) {
+  localStorage.setItem('txnx_mode', 'user');
+  localStorage.setItem('txnx_uid',  user.uid);
+  const name = username || user.displayName || user.email.split('@')[0];
+  localStorage.setItem('txnx_username', name);
+  // Pre-seed settings with username if not yet set
+  const existing = localStorage.getItem('txnx_settings');
+  if (!existing) {
+    localStorage.setItem('txnx_settings', JSON.stringify({ username: name, role: 'Bug Hunter', theme: 'dark', accentColor: 'purple' }));
+  }
+}
+
+/* ---- Login ---- */
+async function handleLogin(e) {
+  e.preventDefault(); clearMessages();
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  setLoading('login', true);
+  try {
+    const cred = await window.auth.signInWithEmailAndPassword(email, pass);
+    setUserMode(cred.user);
+    showSuccess('Welcome back! Redirecting…');
+    setTimeout(() => window.location.replace('dashboard.html'), 800);
+  } catch(err) {
+    setLoading('login', false);
+    showError(friendlyError(err.code));
+  }
+}
+
+/* ---- Register ---- */
+async function handleRegister(e) {
+  e.preventDefault(); clearMessages();
+  const username = document.getElementById('reg-username').value.trim();
+  const email    = document.getElementById('reg-email').value.trim();
+  const pass     = document.getElementById('reg-pass').value;
+  if (!username) { showError('Please enter a username/handle.'); return; }
+  setLoading('reg', true);
+  try {
+    const cred = await window.auth.createUserWithEmailAndPassword(email, pass);
+    await cred.user.updateProfile({ displayName: username });
+    setUserMode(cred.user, username);
+    showSuccess('Account created! Setting up workspace…');
+    setTimeout(() => window.location.replace('dashboard.html'), 1000);
+  } catch(err) {
+    setLoading('reg', false);
+    showError(friendlyError(err.code));
+  }
+}
+
+/* ---- Guest Mode ---- */
+function continueAsGuest() {
+  localStorage.setItem('txnx_mode', 'guest');
+  localStorage.removeItem('txnx_uid');
+  localStorage.setItem('txnx_username', 'Hunter');
+  window.location.replace('dashboard.html');
+}
+
+/* ---- Friendly error messages ---- */
+function friendlyError(code) {
+  const map = {
+    'auth/user-not-found':       'No account found with that email.',
+    'auth/wrong-password':       'Incorrect password. Try again.',
+    'auth/email-already-in-use': 'That email is already registered. Try logging in.',
+    'auth/weak-password':        'Password must be at least 6 characters.',
+    'auth/invalid-email':        'Please enter a valid email address.',
+    'auth/too-many-requests':    'Too many attempts. Please try again later.',
+    'auth/network-request-failed':'Network error. Check your connection.',
+    'auth/invalid-credential':   'Invalid email or password.'
+  };
+  return map[code] || `Auth error: ${code}`;
+}
 </script>
 </body>
 </html>
