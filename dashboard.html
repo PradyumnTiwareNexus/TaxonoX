@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard — TaxonoX</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/glass.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+</head>
+<body>
+<div class="grid-decoration"></div>
+<div class="particles"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="top-gradient-line"></div>
+
+<div id="toast-container" class="toast-container"></div>
+<div id="sidebar-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:99;backdrop-filter:blur(4px)"></div>
+
+<!-- ===== SIDEBAR ===== -->
+<div class="app-shell">
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle-btn" id="sidebar-toggle-inner" onclick="document.getElementById('sidebar').classList.toggle('collapsed')">›</div>
+  <a href="dashboard.html" class="sidebar-logo" style="text-decoration:none">
+    <div class="sidebar-logo-icon">⚡</div>
+    <div class="sidebar-logo-text">
+      <span class="sidebar-logo-name">TaxonoX</span>
+      <span class="sidebar-logo-sub">Offensive Security OS</span>
+    </div>
+  </a>
+
+  <nav class="sidebar-nav">
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Main</span>
+      <a href="dashboard.html" class="nav-item active">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        <span class="nav-item-text">Dashboard</span>
+      </a>
+      <a href="vulnerabilities.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span class="nav-item-text">Vulnerabilities</span>
+        <span class="nav-badge" id="vuln-badge">—</span>
+      </a>
+      <a href="taxonomy.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        <span class="nav-item-text">Taxonomy</span>
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Knowledge</span>
+      <a href="writeups.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        <span class="nav-item-text">Writeups</span>
+      </a>
+      <a href="payloads.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <span class="nav-item-text">Payloads</span>
+      </a>
+      <a href="notes.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span class="nav-item-text">Recon Notes</span>
+      </a>
+      <a href="#" class="nav-item" onclick="TaxonoX.showToast('info','Coming Soon','Tools Library coming in next update');return false">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        <span class="nav-item-text">Tools</span>
+      </a>
+    </div>
+
+    <div class="sidebar-section">
+      <span class="sidebar-section-label">Workspace</span>
+      <a href="#" class="nav-item" onclick="TaxonoX.showToast('info','Coming Soon','Targets page coming soon');return false">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+        <span class="nav-item-text">Targets</span>
+      </a>
+      <a href="#" class="nav-item" onclick="TaxonoX.showToast('info','Coming Soon','Reports coming soon');return false">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        <span class="nav-item-text">Reports</span>
+      </a>
+      <a href="#" class="nav-item" onclick="TaxonoX.showToast('info','Coming Soon','Bookmarks coming soon');return false">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+        <span class="nav-item-text">Bookmarks</span>
+      </a>
+      <a href="settings.html" class="nav-item">
+        <svg class="nav-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        <span class="nav-item-text">Settings</span>
+      </a>
+    </div>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="user-avatar user-avatar-display">H</div>
+      <div class="user-info">
+        <div class="user-name user-name-display">HunterX</div>
+        <div class="user-role user-role-display">Bug Hunter</div>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== MAIN CONTENT ===== -->
+<main class="main-content">
+
+  <!-- TOP NAVBAR -->
+  <header class="top-navbar">
+    <button class="navbar-toggle" id="mobile-menu-btn" aria-label="Toggle sidebar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+
+    <div class="search-bar" style="position:relative">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" class="search-input" id="global-search" placeholder="Search vulnerabilities, payloads, notes…" autocomplete="off" />
+      <span class="search-shortcut">⌘K</span>
+      <div class="search-results" id="search-results" style="display:none"></div>
+    </div>
+
+    <div class="navbar-right">
+      <button class="add-vuln-btn" id="add-vuln-btn" data-modal-open="add-vuln-modal">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span>Add Vulnerability</span>
+      </button>
+
+      <button class="icon-btn" onclick="TaxonoX.exportData()" title="Export Data">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      </button>
+
+      <label class="icon-btn" title="Import Data" style="cursor:pointer">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        <input type="file" accept=".json" id="import-file" class="sr-only" />
+      </label>
+
+      <button class="icon-btn" title="Notifications">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="badge-dot"></span>
+      </button>
+
+      <div class="navbar-user">
+        <div class="user-avatar" style="width:28px;height:28px;font-size:11px" class="user-avatar-display">H</div>
+        <div style="display:flex;flex-direction:column">
+          <span style="font-size:12px;font-weight:600" class="user-name-display">HunterX</span>
+          <span style="font-size:10px;color:var(--text-secondary)">Bug Hunter</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE CONTENT -->
+  <div class="page-content page-enter">
+
+    <!-- Page Header -->
+    <div class="page-header" style="display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:12px">
+      <div>
+        <div style="font-size:11px;color:var(--color-cyan);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px">Dashboard</div>
+        <h1 class="page-title">Hello, <span class="user-name-display gradient-text">HunterX</span> 👋</h1>
+        <p class="page-subtitle">Welcome back to your offensive security workspace.</p>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-secondary btn-sm" data-modal-open="shortcuts-modal">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h.01M10 12h.01M14 12h.01M18 12h.01M8 9h.01M12 9h.01M16 9h.01M8 15h.01M12 15h.01M16 15h.01"/></svg>
+          Shortcuts
+        </button>
+        <button class="btn btn-primary btn-sm" data-modal-open="add-vuln-modal">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add Vulnerability
+        </button>
+      </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="grid grid-cols-7 gap-4 mb-4 stagger-children" style="margin-bottom:20px">
+      <!-- Total -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Total</span>
+          <div class="stat-icon stat-icon-total">🛡️</div>
+        </div>
+        <div class="stat-card-value" id="stat-total">0</div>
+        <div class="stat-card-change up">↑ this week</div>
+      </div>
+      <!-- Critical -->
+      <div class="stat-card glow-card-critical">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Critical</span>
+          <div class="stat-icon stat-icon-critical">🔴</div>
+        </div>
+        <div class="stat-card-value" id="stat-critical" style="color:#ff6b8a">0</div>
+        <div class="stat-card-change" style="color:var(--text-muted)">P1 severity</div>
+      </div>
+      <!-- High -->
+      <div class="stat-card glow-card-high">
+        <div class="stat-card-top">
+          <span class="stat-card-label">High</span>
+          <div class="stat-icon stat-icon-high">🟠</div>
+        </div>
+        <div class="stat-card-value" id="stat-high" style="color:#ff8c5c">0</div>
+        <div class="stat-card-change" style="color:var(--text-muted)">P2 severity</div>
+      </div>
+      <!-- Medium -->
+      <div class="stat-card glow-card-medium">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Medium</span>
+          <div class="stat-icon stat-icon-medium">🟡</div>
+        </div>
+        <div class="stat-card-value" id="stat-medium" style="color:#fcd34d">0</div>
+        <div class="stat-card-change" style="color:var(--text-muted)">P3 severity</div>
+      </div>
+      <!-- Low -->
+      <div class="stat-card glow-card-low">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Low</span>
+          <div class="stat-icon stat-icon-low">🔵</div>
+        </div>
+        <div class="stat-card-value" id="stat-low" style="color:#22d3ee">0</div>
+        <div class="stat-card-change" style="color:var(--text-muted)">P4 severity</div>
+      </div>
+      <!-- Info -->
+      <div class="stat-card glow-card-info">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Info</span>
+          <div class="stat-icon stat-icon-info">🟣</div>
+        </div>
+        <div class="stat-card-value" id="stat-info" style="color:#a78bfa">0</div>
+        <div class="stat-card-change" style="color:var(--text-muted)">Informational</div>
+      </div>
+      <!-- Writeups -->
+      <div class="stat-card">
+        <div class="stat-card-top">
+          <span class="stat-card-label">Writeups</span>
+          <div class="stat-icon stat-icon-writeups">📝</div>
+        </div>
+        <div class="stat-card-value" id="stat-writeups" style="color:#34d399">0</div>
+        <div class="stat-card-change up">documented</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID: Charts + Activity -->
+    <div class="grid gap-4" style="grid-template-columns:1fr 1fr 1fr;margin-bottom:20px">
+
+      <!-- Vulnerability Over Time -->
+      <div class="card" style="grid-column:span 2">
+        <div class="card-header">
+          <span class="card-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-light)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            Vulnerabilities Over Time
+          </span>
+          <select class="filter-select" style="font-size:11px;padding:3px 20px 3px 8px" onchange="">
+            <option>This Year</option>
+            <option>Last 6 months</option>
+            <option>All Time</option>
+          </select>
+        </div>
+        <div class="card-body" style="padding-top:8px">
+          <canvas id="line-chart" width="600" height="180" style="width:100%;height:auto;max-height:180px"></canvas>
+        </div>
+      </div>
+
+      <!-- Donut Chart -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-light)" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
+            Vulnerability by Rating
+          </span>
+        </div>
+        <div class="card-body" style="padding-top:8px">
+          <div class="chart-container">
+            <canvas id="donut-chart" width="160" height="160" style="width:160px;height:160px"></canvas>
+          </div>
+          <div style="margin-top:12px;display:flex;flex-direction:column;gap:4px">
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:11px">
+              <div style="display:flex;align-items:center;gap:5px"><span class="severity-dot critical"></span><span style="color:var(--text-secondary)">Critical</span></div>
+              <span id="pct-critical" style="color:#ff6b8a;font-weight:600">—</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:11px">
+              <div style="display:flex;align-items:center;gap:5px"><span class="severity-dot high"></span><span style="color:var(--text-secondary)">High</span></div>
+              <span id="pct-high" style="color:#ff8c5c;font-weight:600">—</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:11px">
+              <div style="display:flex;align-items:center;gap:5px"><span class="severity-dot medium"></span><span style="color:var(--text-secondary)">Medium</span></div>
+              <span id="pct-medium" style="color:#fcd34d;font-weight:600">—</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:11px">
+              <div style="display:flex;align-items:center;gap:5px"><span class="severity-dot low"></span><span style="color:var(--text-secondary)">Low</span></div>
+              <span id="pct-low" style="color:#22d3ee;font-weight:600">—</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;justify-content:space-between;font-size:11px">
+              <div style="display:flex;align-items:center;gap:5px"><span class="severity-dot info"></span><span style="color:var(--text-secondary)">Info</span></div>
+              <span id="pct-info" style="color:#a78bfa;font-weight:600">—</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECOND ROW: Activity + Categories + Weekly Progress -->
+    <div class="grid gap-4" style="grid-template-columns:1fr 1fr 220px;margin-bottom:20px">
+
+      <!-- Recent Activity -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Recent Activity
+          </span>
+          <a href="vulnerabilities.html" class="btn btn-ghost btn-sm">View All →</a>
+        </div>
+        <div class="card-body" style="padding-top:4px" id="recent-activity">
+          <div class="animate-pulse" style="color:var(--text-muted);font-size:12px">Loading…</div>
+        </div>
+      </div>
+
+      <!-- Popular Categories -->
+      <div class="card">
+        <div class="card-header">
+          <span class="card-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-light)" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Top Weakness Types
+          </span>
+        </div>
+        <div class="card-body" style="padding-top:4px" id="top-weaknesses">
+          <div class="animate-pulse" style="color:var(--text-muted);font-size:12px">Loading…</div>
+        </div>
+      </div>
+
+      <!-- Weekly Progress -->
+      <div class="card" style="display:flex;flex-direction:column">
+        <div class="card-header">
+          <span class="card-title" style="font-size:13px">
+            📊 Weekly Progress
+          </span>
+        </div>
+        <div class="card-body" style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+          <div style="position:relative;width:100px;height:100px">
+            <svg width="100" height="100" style="transform:rotate(-90deg)">
+              <circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
+              <circle id="progress-ring" cx="50" cy="50" r="38" fill="none"
+                stroke="url(#progressGrad)" stroke-width="8" stroke-linecap="round"
+                style="transition:stroke-dashoffset 1s ease"/>
+              <defs>
+                <linearGradient id="progressGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#8855ff"/>
+                  <stop offset="100%" stop-color="#22d3ee"/>
+                </linearGradient>
+              </defs>
+            </svg>
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center">
+              <div style="font-size:18px;font-weight:800;color:var(--text-primary)" id="progress-pct">—</div>
+              <div style="font-size:9px;color:var(--text-muted)">reported</div>
+            </div>
+          </div>
+          <div style="width:100%;display:grid;grid-template-columns:1fr 1fr;gap:8px;text-align:center">
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;padding:8px">
+              <div style="font-size:18px;font-weight:700;color:var(--color-purple-light)" id="progress-found">0</div>
+              <div style="font-size:10px;color:var(--text-muted)">found</div>
+            </div>
+            <div style="background:rgba(255,255,255,0.03);border:1px solid var(--border-subtle);border-radius:8px;padding:8px">
+              <div style="font-size:18px;font-weight:700;color:var(--color-cyan)" id="progress-total">0</div>
+              <div style="font-size:10px;color:var(--text-muted)">total</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VULNERABILITIES TABLE -->
+    <div class="card" style="margin-bottom:20px">
+      <div class="card-header">
+        <span class="card-title">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-light)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Vulnerabilities
+        </span>
+        <div style="display:flex;gap:8px;align-items:center">
+          <span class="text-muted text-xs" id="vuln-count">—</span>
+          <a href="vulnerabilities.html" class="btn btn-secondary btn-sm">View All →</a>
+          <button class="btn btn-primary btn-sm" data-modal-open="add-vuln-modal">+ Add</button>
+        </div>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:90px">ID</th>
+              <th>Vulnerability</th>
+              <th style="width:100px">Rating</th>
+              <th style="width:90px">OWASP</th>
+              <th style="width:90px">CWE</th>
+              <th style="width:110px">Status</th>
+              <th style="width:110px">Added On</th>
+              <th>Tags</th>
+            </tr>
+          </thead>
+          <tbody id="dashboard-vuln-body">
+            <tr><td colspan="8" class="text-center text-muted" style="padding:24px">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- QUICK ACTIONS -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-title">⚡ Quick Actions</span>
+      </div>
+      <div class="card-body">
+        <div class="quick-actions">
+          <button class="quick-action-btn" data-modal-open="add-vuln-modal">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-purple-light)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Add Vulnerability
+          </button>
+          <button class="quick-action-btn" onclick="window.location.href='notes.html'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-cyan)" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Add Note
+          </button>
+          <button class="quick-action-btn" onclick="window.location.href='writeups.html'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Add Writeup
+          </button>
+          <button class="quick-action-btn" onclick="window.location.href='payloads.html'">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            Add Payload
+          </button>
+          <button class="quick-action-btn" onclick="TaxonoX.exportData()">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Export JSON
+          </button>
+          <label class="quick-action-btn" style="cursor:pointer">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Import JSON
+            <input type="file" accept=".json" id="import-file" class="sr-only" onchange="TaxonoX.importData(this.files[0])" />
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="text-align:center;padding:24px 0 12px;color:var(--text-muted);font-size:11px">
+      Built by <span style="color:var(--color-purple-light);font-weight:600">PradyumnTiwareNexus</span> © 2026 &nbsp;·&nbsp; TaxonoX — Offensive Security Knowledge OS
+    </footer>
+  </div>
+</main>
+</div>
+
+<!-- ===== ADD VULNERABILITY MODAL ===== -->
+<div class="modal-backdrop" id="add-vuln-modal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">Add New Vulnerability</div>
+        <div style="font-size:11px;color:var(--text-muted);margin-top:2px">Enter vulnerability details below</div>
+      </div>
+      <button class="modal-close" data-modal-close="add-vuln-modal">✕</button>
+    </div>
+
+    <form id="add-vuln-form">
+      <!-- Tabs -->
+      <div class="tab-container">
+        <div class="tabs modal-tabs" style="padding:0 24px;border-bottom:1px solid var(--border-subtle);margin-bottom:0">
+          <button type="button" class="tab-btn active" data-tab="basic">Basic Info</button>
+          <button type="button" class="tab-btn" data-tab="details">Details</button>
+          <button type="button" class="tab-btn" data-tab="exploit">Exploitation</button>
+          <button type="button" class="tab-btn" data-tab="impact">Impact</button>
+          <button type="button" class="tab-btn" data-tab="bugreport">Bug Report</button>
+        </div>
+
+        <div class="modal-body">
+          <!-- Basic Info Tab -->
+          <div class="tab-panel active" data-tab-panel="basic">
+            <div class="grid grid-cols-2 gap-3">
+              <div class="form-group" style="grid-column:span 2">
+                <label class="form-label required">Vulnerability Name</label>
+                <input type="text" name="name" class="form-control" placeholder="e.g. SQL Injection in Login" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Severity</label>
+                <select name="severity" class="form-control" required>
+                  <option value="">Select Severity</option>
+                  <option>Critical</option>
+                  <option>High</option>
+                  <option>Medium</option>
+                  <option>Low</option>
+                  <option>Info</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label required">Status</label>
+                <select name="status" class="form-control" required>
+                  <option value="">Select Status</option>
+                  <option>New</option>
+                  <option>In Progress</option>
+                  <option>Confirmed</option>
+                  <option>Reported</option>
+                  <option>Duplicate</option>
+                  <option>N/A</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">OWASP Category</label>
+                <select name="owasp" class="form-control">
+                  <option value="">Select Category</option>
+                  <option>A01:2021</option><option>A02:2021</option><option>A03:2021</option>
+                  <option>A04:2021</option><option>A05:2021</option><option>A06:2021</option>
+                  <option>A07:2021</option><option>A08:2021</option><option>A09:2021</option>
+                  <option>A10:2021</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">CWE ID</label>
+                <input type="text" name="cwe" class="form-control" placeholder="e.g. CWE-89" />
+              </div>
+              <div class="form-group" style="grid-column:span 2">
+                <label class="form-label">Short Description</label>
+                <textarea name="shortDesc" class="form-control" style="min-height:64px" placeholder="Brief description of the vulnerability…"></textarea>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tags</label>
+                <input type="text" name="tags" class="form-control" placeholder="SQLi, Auth, P1 (comma separated)" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Discovered On</label>
+                <input type="date" name="discoveredOn" class="form-control" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Details Tab -->
+          <div class="tab-panel" data-tab-panel="details">
+            <div class="form-group">
+              <label class="form-label">Detailed Description</label>
+              <textarea name="description" class="form-control" style="min-height:100px" placeholder="Full technical description…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">How To Find</label>
+              <textarea name="howToFind" class="form-control" style="min-height:80px" placeholder="Step-by-step discovery methodology…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Remediation</label>
+              <textarea name="remediation" class="form-control" style="min-height:80px" placeholder="How to fix this vulnerability…"></textarea>
+            </div>
+          </div>
+
+          <!-- Exploitation Tab -->
+          <div class="tab-panel" data-tab-panel="exploit">
+            <div class="form-group">
+              <label class="form-label">Exploit Methodology</label>
+              <textarea name="exploit" class="form-control" style="min-height:80px;font-family:var(--font-mono)" placeholder="Exploit code or steps…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Recon Method</label>
+              <textarea name="reconMethod" class="form-control" style="min-height:60px" placeholder="Recon approach used…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Example Payloads</label>
+              <textarea name="payloads" class="form-control" style="min-height:60px;font-family:var(--font-mono)" placeholder="Payloads used…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Required Tools</label>
+              <input type="text" name="tools" class="form-control" placeholder="Burp Suite, sqlmap, etc." />
+            </div>
+          </div>
+
+          <!-- Impact Tab -->
+          <div class="tab-panel" data-tab-panel="impact">
+            <div class="form-group">
+              <label class="form-label">Impact</label>
+              <textarea name="impact" class="form-control" style="min-height:80px" placeholder="Business and technical impact…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">References</label>
+              <textarea name="references" class="form-control" style="min-height:60px" placeholder="CVE, CWE, OWASP links…"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Writeup URL</label>
+              <input type="url" name="writeupUrl" class="form-control" placeholder="https://..." />
+            </div>
+          </div>
+
+          <!-- Bug Report Tab -->
+          <div class="tab-panel" data-tab-panel="bugreport">
+            <div class="form-group">
+              <label class="form-label">Target URL</label>
+              <input type="text" name="target" class="form-control" placeholder="api.example.com" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Bug Bounty Platform</label>
+              <select name="platform" class="form-control">
+                <option value="">Select Platform</option>
+                <option>HackerOne</option>
+                <option>Bugcrowd</option>
+                <option>Intigriti</option>
+                <option>Synack</option>
+                <option>YesWeHack</option>
+                <option>Private Program</option>
+                <option>CTF</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Real-world Example</label>
+              <textarea name="realExample" class="form-control" style="min-height:80px" placeholder="Real CVE or disclosed example…"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-modal-close="add-vuln-modal">Cancel</button>
+        <button type="submit" class="btn btn-primary">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Create Vulnerability
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ===== SHORTCUTS MODAL ===== -->
+<div class="modal-backdrop" id="shortcuts-modal" style="display:none">
+  <div class="modal-box" style="max-width:420px">
+    <div class="modal-header">
+      <div class="modal-title">Keyboard Shortcuts</div>
+      <button class="modal-close" data-modal-close="shortcuts-modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Search</span>
+          <div style="display:flex;gap:4px"><span class="kbd">⌘</span><span class="kbd">K</span></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Add Vulnerability</span>
+          <span class="kbd">N</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Dashboard</span>
+          <span class="kbd">1</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Vulnerabilities</span>
+          <span class="kbd">2</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Taxonomy</span>
+          <span class="kbd">3</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid var(--border-subtle)">
+          <span style="font-size:13px;color:var(--text-secondary)">Writeups</span>
+          <span class="kbd">4</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:6px 0">
+          <span style="font-size:13px;color:var(--text-secondary)">This dialog</span>
+          <span class="kbd">?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script>
+  // Update vuln badge in sidebar
+  document.addEventListener('DOMContentLoaded', () => {
+    const badge = document.getElementById('vuln-badge');
+    if (badge) badge.textContent = TaxonoX.Storage.get('vulns', []).length;
+
+    // Update vuln count
+    const countEl = document.getElementById('vuln-count');
+    if (countEl) countEl.textContent = TaxonoX.Storage.get('vulns', []).length + ' vulnerabilities';
+
+    // Update donut percent labels
+    const stats = TaxonoX.getVulnStats();
+    const total = stats.total || 1;
+    const pcts = { critical: stats.critical, high: stats.high, medium: stats.medium, low: stats.low, info: stats.info };
+    Object.entries(pcts).forEach(([k, v]) => {
+      const el = document.getElementById('pct-' + k);
+      if (el) el.textContent = Math.round(v / total * 100) + '%';
+    });
+  });
+
+  // Modal tab switching
+  document.querySelectorAll('.modal-tabs .tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const modal = btn.closest('.tab-container');
+      modal.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      modal.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      const target = modal.querySelector('[data-tab-panel="' + btn.dataset.tab + '"]');
+      if (target) target.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

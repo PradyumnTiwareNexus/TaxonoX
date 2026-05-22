@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaxonoX — Offensive Security OS</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/glass.css" />
+  <link rel="stylesheet" href="assets/css/animations.css" />
+  <style>
+    .splash {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 32px;
+      position: relative;
+      z-index: 1;
+    }
+    .splash-logo {
+      width: 80px; height: 80px;
+      background: linear-gradient(135deg, var(--color-purple), var(--color-cyan));
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 38px;
+      margin: 0 auto 20px;
+      box-shadow: 0 0 40px rgba(136,85,255,0.5);
+      animation: splashPulse 2s ease-in-out infinite;
+    }
+    @keyframes splashPulse {
+      0%, 100% { box-shadow: 0 0 40px rgba(136,85,255,0.5); }
+      50% { box-shadow: 0 0 60px rgba(136,85,255,0.8), 0 0 100px rgba(34,211,238,0.3); }
+    }
+    .splash-title {
+      font-size: 52px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #a07aff 0%, #22d3ee 50%, #ff6b35 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+    .splash-sub {
+      font-size: 16px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      letter-spacing: 0.5px;
+    }
+    .splash-loading {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .splash-dot {
+      width: 6px; height: 6px;
+      background: var(--color-purple-light);
+      border-radius: 50%;
+      animation: dotBounce 1.2s ease-in-out infinite;
+    }
+    .splash-dot:nth-child(2) { animation-delay: 0.2s; background: var(--color-cyan); }
+    .splash-dot:nth-child(3) { animation-delay: 0.4s; background: var(--color-purple-light); }
+    @keyframes dotBounce {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-6px); }
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      max-width: 600px;
+      margin: 24px auto;
+    }
+    .feature-pill {
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-full);
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+<div class="grid-decoration"></div>
+<div class="particles"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+<div class="top-gradient-line"></div>
+
+<div class="splash">
+  <div class="splash-logo">⚡</div>
+  <div class="splash-title">TaxonoX</div>
+  <div class="splash-sub">Offensive Security Knowledge OS · For Bug Bounty Hunters</div>
+
+  <div class="feature-grid">
+    <div class="feature-pill">🛡️ Vulnerability CRUD</div>
+    <div class="feature-pill">📊 Live Analytics</div>
+    <div class="feature-pill">📝 Writeup Vault</div>
+    <div class="feature-pill">💾 Payload Library</div>
+    <div class="feature-pill">🏷️ OWASP Taxonomy</div>
+    <div class="feature-pill">📒 Recon Notes</div>
+  </div>
+
+  <div class="splash-loading">
+    <div class="splash-dot"></div>
+    <div class="splash-dot"></div>
+    <div class="splash-dot"></div>
+    <span style="margin-left:4px">Initializing workspace…</span>
+  </div>
+</div>
+
+<script src="assets/js/app.js"></script>
+<script>
+  // Auto-redirect to dashboard after init
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+      window.location.href = 'dashboard.html';
+    }, 1200);
+  });
+</script>
+</body>
+</html>
